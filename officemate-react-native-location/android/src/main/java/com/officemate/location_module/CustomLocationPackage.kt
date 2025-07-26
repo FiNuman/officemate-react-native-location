@@ -7,7 +7,11 @@ import com.facebook.react.uimanager.ViewManager
 
 class CustomLocationPackage : ReactPackage {
     override fun createNativeModules(reactContext: ReactApplicationContext): List<NativeModule> {
-        return listOf(CustomLocationModule(reactContext))
+
+        return return listOf(
+            CustomLocationModule(reactContext),
+            LocationPermissionsModule(reactContext) 
+        ) 
     }
 
     override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> {

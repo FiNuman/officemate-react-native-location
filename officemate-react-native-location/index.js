@@ -1,6 +1,6 @@
 import { NativeModules, Platform, PermissionsAndroid, Alert } from 'react-native';
 
-const { CustomLocation } = NativeModules;
+const { CustomLocation, LocationPermissions } = NativeModules;
 
 async function requestLocationPermission() {
   if (Platform.OS === 'android') {
@@ -43,8 +43,21 @@ function stopForegroundLocationUpdates() {
   CustomLocation.stopForegroundLocationUpdates();
 }
 
+
+async function BG_permission() {
+  const hasPermission = await LocationPermissions.BG_permission();
+  return hasPermission;
+}
+
+async function FG_permission() {
+  const hasPermission = await LocationPermissions.FG_permission();
+  return hasPermission;
+}
+
 export default {
   getCurrentPosition,
   startForegroundLocationUpdates,
   stopForegroundLocationUpdates,
+  BG_permission,
+  FG_permission
 };
