@@ -1,12 +1,15 @@
 {
   "name": "officemate-react-native-location",
-  "version": "1.0.1",
+  "version": "1.5.0",
   "main": "index.js",
-  "scripts": {},
   "keywords": [
     "react-native",
-    "location"
+    "location",
+    "gps",
+    "foreground",
+    "android"
   ],
+  "scripts": {},
   "peerDependencies": {
     "react-native": ">=0.60"
   },
@@ -17,5 +20,17 @@
     "ios": {
       "podspecPath": "ios/CustomLocation.podspec"
     }
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FiNuman/officemate-react-native-location.git",
+    "directory": "officemate-react-native-location"
+  },
+  "license": "MIT",
+  "author": "Quarrysync",
+  "files": [
+    "index.js",
+    "android",
+    "ios"
+  ]
 }
