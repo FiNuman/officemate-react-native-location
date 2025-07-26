@@ -1,0 +1,47 @@
+# Node.js dependencies
+node_modules/
+
+# Android build
+.gradle/
+android/.gradle/
+android/app/build/
+android/build/
+android/.cxx/
+android/.externalNativeBuild/
+**/build/
+**/android/build/
+**/android/app/build/
+**/android/.transforms/
+**/android/.cxx/
+
+# Kotlin/Java compiled files
+**/*.class
+**/*.jar
+**/*.apk
+**/*.keystore
+
+# Xcode / iOS build
+ios/Pods/
+ios/build/
+ios/DerivedData/
+ios/*.xcworkspace
+ios/*.xcuserdata
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# Mac system files
+.DS_Store
+
+# Misc
+.expo/
+dist/

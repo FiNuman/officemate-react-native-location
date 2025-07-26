@@ -1,0 +1,7 @@
+npx react-native run-android
+
+Get-Item .\node_modules\officemate-react-native-location
+
+includeBuild("../node_modules/officemate-react-native-location")
+
+./gradlew clean 

@@ -1,0 +1,21 @@
+{
+  "name": "officemate-react-native-location",
+  "version": "1.0.1",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [
+    "react-native",
+    "location"
+  ],
+  "peerDependencies": {
+    "react-native": ">=0.60"
+  },
+  "react-native": {
+    "android": {
+      "sourceDir": "android"
+    },
+    "ios": {
+      "podspecPath": "ios/CustomLocation.podspec"
+    }
+  }
+}
