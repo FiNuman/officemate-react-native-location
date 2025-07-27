@@ -5,12 +5,17 @@ import LocationModule from 'officemate-react-native-location';
 
 function App() {
 
-   const getLocation = async () => {
+  const getLocation = async () => {
     try {
       console.log('Requesting current location...');
 
-      const hasPermission = await LocationModule.BG_permission();
-     
+      try {
+        await LocationModule.location_access();
+      } catch (error) {
+        console.log(error);
+      }
+
+
       const location = await LocationModule.getCurrentPosition({
         enableHighAccuracy: true,
         timeout: 10000,

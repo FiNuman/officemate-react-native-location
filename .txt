@@ -5,3 +5,5 @@ Get-Item .\node_modules\officemate-react-native-location
 includeBuild("../node_modules/officemate-react-native-location")
 
 ./gradlew clean 
+
+npm publish --tag beta

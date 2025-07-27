@@ -1,6 +1,6 @@
 import { NativeModules, Platform, PermissionsAndroid, Alert } from 'react-native';
 
-const { CustomLocation, LocationPermissions } = NativeModules;
+const { CustomLocation, LocationPermissions, PopupLocationAccess } = NativeModules;
 
 async function requestLocationPermission() {
   if (Platform.OS === 'android') {
@@ -23,8 +23,11 @@ async function getCurrentPosition(options = {}) {
     return { error: true, code: 'PERMISSION_DENIED', message: 'Location permission is required.' };
   }
   try {
-    const location = await CustomLocation.getCurrentPosition(options);
+    
+    await PopupLocationAccess.promptEnableLocation()
+    const location = await CustomLocation.getCurrentPosition(options); 
     return { error: false, location };
+
   } catch (err) {
     return { error: true, code: err.code || 'ERROR', message: err.message || 'Unknown error' };
   }
@@ -54,10 +57,16 @@ async function FG_permission() {
   return hasPermission;
 }
 
+async function location_access_popup() {
+  const hasPermission = await PopupLocationAccess.promptEnableLocation();
+  return hasPermission;
+}
+
 export default {
   getCurrentPosition,
   startForegroundLocationUpdates,
   stopForegroundLocationUpdates,
   BG_permission,
-  FG_permission
+  FG_permission,
+  location_access: location_access_popup
 };

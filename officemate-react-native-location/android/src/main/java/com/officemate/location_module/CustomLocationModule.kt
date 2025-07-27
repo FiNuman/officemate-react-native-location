@@ -8,14 +8,13 @@ import com.facebook.react.bridge.*
 import com.facebook.react.modules.core.DeviceEventManagerModule
 import com.google.android.gms.location.*
 
-
 import com.google.android.gms.location.Priority
 import com.google.android.gms.location.LocationAvailability
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationResult
 import android.os.Looper
 import android.location.LocationManager
-import android.content.Context
+import android.content.Context 
 
 class CustomLocationModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
 
@@ -31,7 +30,7 @@ class CustomLocationModule(reactContext: ReactApplicationContext) : ReactContext
             promise.reject("PERMISSION_DENIED", "Location permission not granted")
             return
         }
-
+ 
         if (!isLocationEnabled()) {
             promise.reject("LOCATION_DISABLED", "GPS or Location Services are turned off")
             return
@@ -94,11 +93,9 @@ class CustomLocationModule(reactContext: ReactApplicationContext) : ReactContext
             return
         }
 
-        val locationRequest = LocationRequest.create().apply {
-            interval = 10000 // 10 seconds
-            fastestInterval = 5000
-            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-        }
+        val locationRequest = LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 10000L)
+            .setMinUpdateIntervalMillis(5000L)
+            .build()
 
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult) {
@@ -128,10 +125,10 @@ class CustomLocationModule(reactContext: ReactApplicationContext) : ReactContext
     }
 
     private fun isLocationEnabled(): Boolean {
-    val locationManager = reactApplicationContext.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-    return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
-           locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
-}
+        val locationManager = reactApplicationContext.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
+            locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+    }
 
     private fun fillLocationMap(map: WritableMap, location: android.location.Location) {
         map.putDouble("latitude", location.latitude)
