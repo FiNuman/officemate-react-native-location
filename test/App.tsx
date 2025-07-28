@@ -7,11 +7,13 @@ function App() {
 
   const getLocation = async () => {
     try {
-
+ 
+      let bg_access = await LocationModule.getCurrentPosition({enableHighAccuracy : true, timeout: 10000}); 
+      console.log(bg_access)
       // const location = await LocationModule.getCurrentPosition({
       //   enableHighAccuracy: true,
       //   timeout: 10000,
-      // });
+      // }); 
 
     } catch (err) {
       console.error('Error getting location:', err);
