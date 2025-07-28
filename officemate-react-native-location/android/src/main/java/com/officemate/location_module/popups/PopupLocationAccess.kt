@@ -1,4 +1,5 @@
-package com.officemate.location_module
+package com.officemate.location_module.popups
+
 
 import android.app.Activity
 import android.content.Intent
