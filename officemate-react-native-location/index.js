@@ -5,32 +5,11 @@ const {
   LocationPermissions,
   PopupLocationAccess,
   BGLocation,
-  FGLocation
+  FGLocation,
 } = NativeModules;
 
-const requestLocationPermission = async () => {
-  if (Platform.OS !== 'android') return true;
-
-  const granted = await PermissionsAndroid.request(
-    PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-    {
-      title: 'Location Permission',
-      message: 'This app needs access to your location.',
-      buttonPositive: 'OK',
-    }
-  );
-
-  return granted === PermissionsAndroid.RESULTS.GRANTED;
-};
 
 const getCurrentPosition = async (options = {}) => {
-  if (!(await requestLocationPermission())) {
-    return {
-      error: true,
-      code: 'PERMISSION_DENIED',
-      message: 'Location permission is required.',
-    };
-  }
 
   try {
     await FGLocation.requestForegroundPermission()
@@ -47,11 +26,9 @@ const getCurrentPosition = async (options = {}) => {
 };
 
 const startForegroundLocationUpdates = async () => {
-  if (!(await requestLocationPermission())) {
-    Alert.alert('Permission Denied', 'Location permission is required.');
-    return;
-  }
-  CustomLocation.startForegroundLocationUpdates();
+  Alert.alert('Permission Denied', 'Location permission is required.');
+  return;
+  // CustomLocation.startForegroundLocationUpdates();
 };
 
 const stopForegroundLocationUpdates = () => {
@@ -61,8 +38,8 @@ const stopForegroundLocationUpdates = () => {
 const BG_permission = () => LocationPermissions.BG_permission();
 const FG_permission = () => LocationPermissions.FG_permission();
 const location_access = () => PopupLocationAccess.promptEnableLocation();
-const BG_permission_access_req = () => BGLocation.promptBackgroundLocationPermission();
 const FG_permission_access_req = () => FGLocation.requestForegroundPermission();
+const BG_permission_access_req = () => BGLocation.requestBackgroundPermission();
 
 export default {
   getCurrentPosition,
@@ -71,6 +48,6 @@ export default {
   BG_permission,
   FG_permission,
   location_access,
-  BG_permission_access_req,
   FG_permission_access_req,
+  BG_permission_access_req,
 };

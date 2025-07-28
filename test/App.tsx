@@ -7,8 +7,8 @@ function App() {
 
   const getLocation = async () => {
     try {
- 
-      let bg_access = await LocationModule.getCurrentPosition({enableHighAccuracy : true, timeout: 10000}); 
+
+      let bg_access = await LocationModule.BG_permission_access_req();
       console.log(bg_access)
       // const location = await LocationModule.getCurrentPosition({
       //   enableHighAccuracy: true,
